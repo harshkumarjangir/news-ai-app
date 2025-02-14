@@ -55,7 +55,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile View */}
-                <ul className={`${isOpen ? 'block' : 'hidden'} sm:hidden gap-5 text-md text-center bg-gray-300`}>
+                <motion.ul initial={{ opacity: 0, scale: 0 , y: -100 }} animate={{ opacity: 1, scale: 1 , y: 0 }} transition={{ duration: 1.5 }} className={`${isOpen ? 'block' : 'hidden'} sm:hidden gap-5 text-md text-center bg-white`}>
                     {
                         ['Home', 'Categories', 'Channel', 'About']
                             .map((item) => (
@@ -82,7 +82,7 @@ const Navbar = () => {
                             </Button>
                         </Link>
                     </div>
-                </ul>
+                </motion.ul>
 
             </nav>
         </div>

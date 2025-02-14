@@ -13,8 +13,8 @@ const Login = () => {
     }
 
     return (
-        <div className='h-screen flex justify-center items-center bg-gray-100'>
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="w-80 rounded-2xl p-6 shadow-md bg-white">
+        <div className='h-screen flex justify-center items-center bg-gray-100 px-2'>
+            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }} className="w-full sm:w-96 rounded-2xl p-6 shadow-md bg-white">
                 <h1 className='text-center text-2xl font-bold mb-4'>Welcome back to NewsAI!</h1>
                 <form action="" className="space-y-6">
                     <div className="flex justify-center items-center gap-2 relative">
