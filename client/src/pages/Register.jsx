@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'motion/react';
-import { Mail, Lock, Eye, EyeOff, User, LockKeyhole } from 'lucide-react';
+import { Mail, Eye, EyeOff, User, LockKeyhole } from 'lucide-react';
 import { Button } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
