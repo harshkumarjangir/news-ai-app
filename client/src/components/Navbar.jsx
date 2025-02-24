@@ -6,6 +6,9 @@ import { X, AlignRight, LogIn, UserPlus } from 'lucide-react';
 
 const Navbar = () => {
 
+    // console.log(import.meta.env.VITE_API_URL);
+    
+
     const [isOpen, setIsOpen] = useState(false)
 
     const hancleOpen = () => {

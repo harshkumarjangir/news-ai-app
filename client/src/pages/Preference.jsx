@@ -16,7 +16,7 @@ const Preference = () => {
         'Politics',
     ];
 
-    console.log(categories);
+    // console.log(categories);
 
     const toggleCategory = (category) => {
         setelectedCategory(
@@ -26,7 +26,7 @@ const Preference = () => {
         )
     }
 
-    console.log(selectedCategory);
+    // console.log(selectedCategory);
     
 
 
