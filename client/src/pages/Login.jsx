@@ -6,8 +6,13 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/slices/authSlice';
+
 
 const Login = () => {
+
+    const dispatch = useDispatch()
 
     const LoginSchema = z.object({
         email: z
@@ -38,6 +43,7 @@ const Login = () => {
 
     const onSubmit = (data) => {
         console.log(data);
+        dispatch(login(data))
     }
 
     return (
@@ -72,7 +78,7 @@ const Login = () => {
 
                     <Button fullWidth variant='default' >Sign In with Google</Button>
 
-                    <p className='text-center text-gray-700'>Don't have an account? {' '}
+                    <p className='text-center text-gray-700'>Don&apos;t have an account? {' '}
                         <Link to="/register" className='text-blue-600 ml-0.5 underline font-medium'>
                             Register
                         </Link>

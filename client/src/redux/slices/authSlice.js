@@ -16,6 +16,16 @@ export const SignUp = createAsyncThunk('/register', async (data, { rejectWithVal
     }
 })
 
+export const login = createAsyncThunk('/login', async (data, { rejectWithValue }) => {
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, data, { withCredentials: true })
+        const verifyRes = await axios.get(`${import.meta.env.VITE_API_URL}/auth/verify`, { withCredentials: true })
+        return res.data
+    } catch (error) {
+        return rejectWithValue(error)
+    }
+})
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -32,6 +42,12 @@ const authSlice = createSlice({
             state.loading = false
             console.log(action.payload);
             toast.error(action.payload.response.data.message)
+        }).addCase(login.pending, (state) => {
+            state.loading = true
+        }).addCase(login.fulfilled, (state, action) => {
+            state.loading = false
+        }).addCase(login.rejected, (state, action) => {
+            state.loading = false
         })
     }
 

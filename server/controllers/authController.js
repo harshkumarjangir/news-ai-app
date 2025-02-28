@@ -27,7 +27,7 @@ export const login = async (req, res) => {
 
     // setting Token on Cookie
     res.cookie('token', token, {
-      httpOnly: true
+      httpOnly: true,
     })
 
     res.status(200).json({
@@ -39,6 +39,22 @@ export const login = async (req, res) => {
 
   }
 }
+
+
+export const verify = async (req, res) => {
+  console.log('verify wali api', req.user);
+  if (!req.user) {
+
+  } else {
+    return res.status(200).json({
+      authenticated: true,
+      id: req.user.id,
+      name: req.user.name
+    })
+  }
+
+}
+
 
 export const register = async (req, res) => {
   try {
