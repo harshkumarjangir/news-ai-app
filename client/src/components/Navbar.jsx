@@ -3,12 +3,14 @@ import { Link, NavLink } from 'react-router-dom'
 import { motion } from "motion/react"
 import { Button } from '@mantine/core'
 import { X, AlignRight, LogIn, UserPlus } from 'lucide-react';
+import { useSelector } from 'react-redux';
+import ProfileDropDown from './ProfileDropDown';
 
 const Navbar = () => {
 
     // console.log(import.meta.env.VITE_API_URL);
-    
 
+    const { authenticated } = useSelector((state) => state.auth)
     const [isOpen, setIsOpen] = useState(false)
 
     const hancleOpen = () => {
@@ -22,7 +24,7 @@ const Navbar = () => {
                     <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .5 }} className="text-2xl font-semibold">NewsAI</motion.h1>
 
                     {/* DeskTop View*/}
-                    <ul className='hidden md:flex gap-5 text-sm '>
+                    <ul className='hidden md:flex gap-5 text-sm  absolute left-1/2 -translate-x-1/2'>
                         {
                             ['Home', 'Categories', 'Channel', 'About']
                                 .map((item) => (
@@ -39,17 +41,23 @@ const Navbar = () => {
                         }
                     </ul>
 
-                    <div className="hidden md:flex justify-between items-center space-x-5">
-                        <Link to='/login'>
-                            <Button className='' variant='default' rightSection={<LogIn size={14} />}>
-                                Login
-                            </Button>
-                        </Link>
-                        <Link to='/register'>
-                            <Button className='' rightSection={<UserPlus size={14} />}>
-                                Register
-                            </Button>
-                        </Link>
+                    <div className="flex items-center space-x-5 ml-auto">
+                        {!authenticated &&
+                            <div className="hidden md:flex justify-between items-center space-x-5">
+                                <Link to='/login'>
+                                    <Button className='' variant='default' rightSection={<LogIn size={14} />}>
+                                        Login
+                                    </Button>
+                                </Link>
+                                <Link to='/register'>
+                                    <Button className='' rightSection={<UserPlus size={14} />}>
+                                        Register
+                                    </Button>
+                                </Link>
+                            </div>
+                        }
+
+                        {authenticated && <ProfileDropDown />}
                     </div>
 
                     <button onClick={hancleOpen} className="md:hidden">

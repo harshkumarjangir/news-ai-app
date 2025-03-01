@@ -24,6 +24,8 @@ export const login = async (req, res) => {
 
     // sign()--> Takes 3 methods -- Payload, Secret String, Expiry
     const token = jwt.sign({ id: user._id, name: user.name }, 'hello_this_string', { expiresIn: '1d' })
+    console.log(user);
+
 
     // setting Token on Cookie
     res.cookie('token', token, {
@@ -31,7 +33,8 @@ export const login = async (req, res) => {
     })
 
     res.status(200).json({
-      token,
+      // token,
+      preference: user.preference,
       message: "Login Successful"
     })
 

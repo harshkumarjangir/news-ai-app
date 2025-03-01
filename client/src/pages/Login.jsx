@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'motion/react';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@mantine/core';
@@ -6,13 +6,35 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../redux/slices/authSlice';
+import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie'
 
 
 const Login = () => {
 
+    console.log(Cookies.get('token')); // Cant access it on ui
+
+    const [isEyePass, setIsEyePass] = useState(false)
+
+    const { authenticated, preference } = useSelector((state) => state.auth)
+    console.log(authenticated);
+    console.log(preference);
+    console.log(preference.length > 0);
+    console.log(preference.length <= 0);
+
+
+    useEffect(() => {
+        if (authenticated && preference.length > 0) {
+            naviagte('/')
+        } else if (authenticated && preference.length <= 0) {
+            naviagte('/preference')
+        }
+    }, [authenticated])
+
     const dispatch = useDispatch()
+    const naviagte = useNavigate()
 
     const LoginSchema = z.object({
         email: z
@@ -30,12 +52,9 @@ const Login = () => {
         resolver: zodResolver(LoginSchema)
     })
 
-    console.log(register("email"));
+    // console.log(register("email"));
     console.log(errors);
 
-
-
-    const [isEyePass, setIsEyePass] = useState(false)
 
     const hancleEyePass = () => {
         setIsEyePass(!isEyePass)
@@ -44,6 +63,7 @@ const Login = () => {
     const onSubmit = (data) => {
         console.log(data);
         dispatch(login(data))
+        // naviagte('/')
     }
 
     return (
